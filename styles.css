@@ -51,3 +51,30 @@ body {
   box-shadow: 0 0 20px white;
   background-color: grey;
 }
+
+
+
+//////////////////////
+
+// animation and effect of the button
+$("#green").click(function () {
+    $("#green").fadeOut(200).fadeIn(200)
+ var greenAudio = new Audio('sounds/green.mp3')
+ greenAudio.play();
+})
+$("#red").click(function () {
+    $("#red").fadeOut(200).fadeIn(200)
+    var redAudio = new Audio('sounds/red.mp3')
+    redAudio.play();
+})
+$("#yellow").click(function () {
+    $("#yellow").fadeOut(200).fadeIn(200)
+    var yellowAudio = new Audio('sounds/yellow.mp3')
+    yellowAudio.play();
+})
+$("#blue").click(function () {
+    $("#blue").fadeOut(200).fadeIn(200)
+    var blueAudio = new Audio('sounds/blue.mp3')
+    blueAudio.play();
+})
+
