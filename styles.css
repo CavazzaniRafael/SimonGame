@@ -56,25 +56,50 @@ body {
 
 //////////////////////
 
-// animation and effect of the button
-$("#green").click(function () {
-    $("#green").fadeOut(200).fadeIn(200)
- var greenAudio = new Audio('sounds/green.mp3')
- greenAudio.play();
-})
-$("#red").click(function () {
-    $("#red").fadeOut(200).fadeIn(200)
-    var redAudio = new Audio('sounds/red.mp3')
-    redAudio.play();
-})
-$("#yellow").click(function () {
-    $("#yellow").fadeOut(200).fadeIn(200)
-    var yellowAudio = new Audio('sounds/yellow.mp3')
-    yellowAudio.play();
-})
-$("#blue").click(function () {
-    $("#blue").fadeOut(200).fadeIn(200)
-    var blueAudio = new Audio('sounds/blue.mp3')
-    blueAudio.play();
-})
 
+var buttonColours = ["red", "blue", "green", "yellow"];
+
+var gamePattern = [];
+var userClickedPattern = [];
+
+// when i click on button
+$(".btn").click(function() {
+
+  var userChosenColour = $(this).attr("id");
+  userClickedPattern.push(userChosenColour);
+
+  playSound(userChosenColour);
+  animatePress(userChosenColour);
+});
+
+function nextSequence() {
+
+  var randomNumber = Math.floor(Math.random() * 4);
+  var randomChosenColour = buttonColours[randomNumber];
+  gamePattern.push(randomChosenColour);
+
+  $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+
+  playSound(randomChosenColour);
+}
+
+function playSound(name) {
+
+  var audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
+// animation on pressed
+function animatePress(currentColour) {
+    $("#" + currentColour).addClass("pressed")
+    setTimeout(() => {
+        $("#" + currentColour).removeClass("pressed")
+    }, 100);
+    
+}
+
+// start the game
+
+var starter = 
+$(document).keypress(function (event) {
+   nextSequence(event.key).toggle()
+})
