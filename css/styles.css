@@ -144,7 +144,7 @@ body {
   }
   
   /* Media query */
-@media (max-width:970px){
+@media (max-width:1015px){
     .btn-start{
         display: flex;
         margin: 3% 45%;
