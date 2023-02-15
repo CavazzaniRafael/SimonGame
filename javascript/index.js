@@ -13,6 +13,7 @@ $(".btn").click(function() {
   animatePress(userChosenColour);
   checkAnswer(userClickedPattern.length-1)
 
+  
 });
 
 function nextSequence() {
