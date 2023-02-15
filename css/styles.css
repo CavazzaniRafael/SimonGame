@@ -111,3 +111,41 @@ body {
   .logo:hover{
     color: rgba(0,136,169,0.8);
   }
+ /* Button phone */
+  .btn-start {
+    background: #3582b5;
+    background-image: -webkit-linear-gradient(top, #3582b5, #1c97e3);
+    background-image: -moz-linear-gradient(top, #3582b5, #1c97e3);
+    background-image: -ms-linear-gradient(top, #3582b5, #1c97e3);
+    background-image: -o-linear-gradient(top, #3582b5, #1c97e3);
+    background-image: linear-gradient(to bottom, #3582b5, #1c97e3);
+    -webkit-border-radius: 13;
+    -moz-border-radius: 13;
+    border-radius: 13px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin-bottom: 40px;
+    display: none;
+  }
+  
+  .btn-start:hover {
+    background: #313f47;
+    background-image: -webkit-linear-gradient(top, #313f47, #3498db);
+    background-image: -moz-linear-gradient(top, #313f47, #3498db);
+    background-image: -ms-linear-gradient(top, #313f47, #3498db);
+    background-image: -o-linear-gradient(top, #313f47, #3498db);
+    background-image: linear-gradient(to bottom, #313f47, #3498db);
+    text-decoration: none;
+  }
+  
+  /* Media query */
+@media (max-width:970px){
+    .btn-start{
+        display: flex;
+        margin: 3% 45%;
+    
+    }
+}
