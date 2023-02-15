@@ -1,154 +1,38 @@
-body {
-    text-align: center;
-    background-color: #011F3F;
-  }
-  
-  #level-title {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 3rem;
-    margin:  5%;
-    color: #FEF2BF;
-  }
-  
-  .container {
-    display: block;
-    width: 50%;
-    margin: auto;
-  
-  }
-  
-  .btn {
-    margin: 25px;
-    display: inline-block;
-    height: 200px;
-    width: 200px;
-    border: 10px solid black;
-    border-radius: 20%;
-  }
-  
-  .game-over {
-    background-color: red;
-    opacity: 0.8;
-  }
-  
-  .red {
-    background-color: red;
-  }
-  
-  .green {
-    background-color: green;
-  }
-  
-  .blue {
-    background-color: blue;
-  }
-  
-  .yellow {
-    background-color: yellow;
-  }
-  
-  .pressed {
-    box-shadow: 0 0 20px white;
-    background-color: grey;
-  }
-  footer {
-    padding:6rem 0 2rem;
-    color: #DBEDF3;
-    font-family: sans-serif;
-  }
+var buttonColours = ["red", "blue", "green", "yellow"];
 
-  /* Navbar */
-  *{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+var gamePattern = [];
+var userClickedPattern = [];
+var lastAnswer =[];
+// when i click on button
+$(".btn").click(function() {
 
-  }
-  li, a, button{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: white;
-    text-decoration: none;
-  }
-  header{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 30px 10%;
-  }
-  .nav-links{
-    list-style: none;
-  }
-  .nav-links li{
-    display: inline-block;
-    padding: 0 20px;
-  }
-  .nav-links li a {
-    transition: all 0.3s ease 0s;
-  }
-  .nav-links li a:hover {
-    color: #0088a9;
-  }
-  
-  .btn-nav{
-    padding: 9px 25px;
-    background-color: rgba(0,136,169,1);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition:all 0.3s ease 0s; ;
+  var userChosenColour = $(this).attr("id");
+  userClickedPattern.push(userChosenColour);
 
-  }
-  .btn-nav:hover{
-    background-color: rgba(0,136,169,0.8);
-  }
-  .logo{
-    cursor: pointer;
-    margin-right: auto;
-    font-size: 30px;
-  }
-  .logo:hover{
-    color: rgba(0,136,169,0.8);
-  }
- /* Button phone */
-  .btn-start {
-    background: #3582b5;
-    background-image: -webkit-linear-gradient(top, #3582b5, #1c97e3);
-    background-image: -moz-linear-gradient(top, #3582b5, #1c97e3);
-    background-image: -ms-linear-gradient(top, #3582b5, #1c97e3);
-    background-image: -o-linear-gradient(top, #3582b5, #1c97e3);
-    background-image: linear-gradient(to bottom, #3582b5, #1c97e3);
-    -webkit-border-radius: 13;
-    -moz-border-radius: 13;
-    border-radius: 13px;
-    font-family: Arial;
-    color: #ffffff;
-    font-size: 20px;
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
-    margin-bottom: 40px;
-    display: none;
-  }
-  
-  .btn-start:hover {
-    background: #313f47;
-    background-image: -webkit-linear-gradient(top, #313f47, #3498db);
-    background-image: -moz-linear-gradient(top, #313f47, #3498db);
-    background-image: -ms-linear-gradient(top, #313f47, #3498db);
-    background-image: -o-linear-gradient(top, #313f47, #3498db);
-    background-image: linear-gradient(to bottom, #313f47, #3498db);
-    text-decoration: none;
-  }
-  
-  /* Media query */
-@media (max-width:970px){
-    .btn-start{
-        display: flex;
-        margin: 3% 45%;
-    
-    }
+  playSound(userChosenColour);
+  animatePress(userChosenColour);
+  checkAnswer(userClickedPattern.length-1)
+
+});
+
+function nextSequence() {
+userClickedPattern = [];
+
+  var randomNumber = Math.floor(Math.random() * 4);
+  var randomChosenColour = buttonColours[randomNumber];
+  gamePattern.push(randomChosenColour);
+
+  $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+    playSound(randomChosenColour); 
+    level ++
+    $("#level-title").text("level " + level)
+
 }
+
+function playSound(name) {
+
+  var audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
 }
 // animation on pressed
 function animatePress(currentColour) {
@@ -171,6 +55,15 @@ $(document).keypress(function () {
 }
 
 })
+$(".btn-start").click(function () {
+    if (!started) {
+     $("#level-title").text("level " + level)
+     nextSequence()
+         started = true;
+ }
+ 
+ })
+
 // Check Answer
 
 function checkAnswer(currentLevel) {
